@@ -14,7 +14,7 @@
 		9F44400320224F1D0044BA3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F44400220224F1D0044BA3E /* Assets.xcassets */; };
 		9F44400620224F1D0044BA3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F44400420224F1D0044BA3E /* LaunchScreen.storyboard */; };
 		9F44401120224F1D0044BA3E /* Shelmerdine_Latin_VocabularyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F44401020224F1D0044BA3E /* Shelmerdine_Latin_VocabularyTests.swift */; };
-		9F44401D202250170044BA3E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F44401B202250170044BA3E /* Model.xcdatamodeld */; };
+		9FA65407202374180042F178 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA65406202374180042F178 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 		9F44400C20224F1D0044BA3E /* Shelmerdine Latin VocabularyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shelmerdine Latin VocabularyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F44401020224F1D0044BA3E /* Shelmerdine_Latin_VocabularyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelmerdine_Latin_VocabularyTests.swift; sourceTree = "<group>"; };
 		9F44401220224F1D0044BA3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F44401C202250170044BA3E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		9FA65406202374180042F178 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,13 +82,13 @@
 			isa = PBXGroup;
 			children = (
 				9F443FF920224F1D0044BA3E /* AppDelegate.swift */,
-				9F44401B202250170044BA3E /* Model.xcdatamodeld */,
 				9F443FFB20224F1D0044BA3E /* FirstViewController.swift */,
 				9F443FFD20224F1D0044BA3E /* SecondViewController.swift */,
 				9F443FFF20224F1D0044BA3E /* Main.storyboard */,
 				9F44400220224F1D0044BA3E /* Assets.xcassets */,
 				9F44400420224F1D0044BA3E /* LaunchScreen.storyboard */,
 				9F44400720224F1D0044BA3E /* Info.plist */,
+				9FA65406202374180042F178 /* DatabaseManager.swift */,
 			);
 			path = "Shelmerdine Latin Vocabulary";
 			sourceTree = "<group>";
@@ -205,10 +205,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA65407202374180042F178 /* DatabaseManager.swift in Sources */,
 				9F443FFE20224F1D0044BA3E /* SecondViewController.swift in Sources */,
 				9F443FFA20224F1D0044BA3E /* AppDelegate.swift in Sources */,
 				9F443FFC20224F1D0044BA3E /* FirstViewController.swift in Sources */,
-				9F44401D202250170044BA3E /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,19 +452,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9F44401B202250170044BA3E /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9F44401C202250170044BA3E /* Model.xcdatamodel */,
-			);
-			currentVersion = 9F44401C202250170044BA3E /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 9F443FEE20224F1D0044BA3E /* Project object */;
 }
