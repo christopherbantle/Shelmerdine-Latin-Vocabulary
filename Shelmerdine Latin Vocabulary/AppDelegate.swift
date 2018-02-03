@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         }() {
         didSet {
-            UserDefaults.standard.set(self.latestChapterForCumulativeViewScreen.rawValue, forKey: "chapterForIndividualChapterViewScreen")
+            UserDefaults.standard.set(self.chapterForIndividualChapterViewScreen.rawValue, forKey: "chapterForIndividualChapterViewScreen")
         }
     }
 }
