@@ -8,19 +8,13 @@
 
 import UIKit
 
-class ViewDictionaryEntriesCumulativelyTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewDictionaryEntriesCumulativelyTableViewController: UITableViewController, UISearchBarDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: Properties
     
-    private var latestChapter = Chapter.ChapterOne
+    private var isInSearchMode = false
     
-    private var isInSearchMode: Bool {
-        get{
-            return self.searchController.isActive
-        }
-    }
-    
-    private var searchType: SearchType?
+    private var searchType: SearchType = .ByWord
     
     private let searchController = UISearchController(searchResultsController: nil)
     
@@ -36,73 +30,71 @@ class ViewDictionaryEntriesCumulativelyTableViewController: UITableViewControlle
     
     func loadData() {
         if self.isInSearchMode {
-            let data = self.databaseManager.getDictionaryEntries(forChaptersUpToAndIncluding: self.latestChapter, containing: self.searchController.searchBar.text!, searchType: self.searchType!)
-            self.filteredDictionaryEntries = data.dictionaryEntries
-            self.filteredCategories = data.categories
+            let data = databaseManager.getDictionaryEntries(forChaptersUpToAndIncluding: latestChapterForCumulativeViewScreen, containing: searchController.searchBar.text!, searchType: searchType)
+            filteredDictionaryEntries = data.dictionaryEntries
+            filteredCategories = data.categories
         } else {
-            let data = self.databaseManager.getDictionaryEntries(forChaptersUpToAndIncluding: self.latestChapter)
-            self.dictionaryEntries = data.dictionaryEntries
-            self.categories = data.categories
+            let data = databaseManager.getDictionaryEntries(forChaptersUpToAndIncluding: latestChapterForCumulativeViewScreen)
+            dictionaryEntries = data.dictionaryEntries
+            categories = data.categories
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.keyboardType = .asciiCapable
-        self.navigationItem.searchController = self.searchController
-        self.definesPresentationContext = true
-        self.searchController.searchBar.scopeButtonTitles = ["By Word", "By Definition"]
-        self.searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.keyboardType = .asciiCapable
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.autocorrectionType = .no
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = ["By Word", "By Definition"]
+        searchController.searchBar.delegate = self
         
-        self.navigationItem.title = "Vocabulary"
-        self.navigationItem.largeTitleDisplayMode = .automatic
+        loadData()
         
-        // Get the latest chapter and category from the app delegate
-        
-        self.loadData()
-        
-        tableView.estimatedRowHeight = 49
+        tableView.allowsSelection = false
+        tableView.estimatedRowHeight = 51
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     // MARK: Table view delegate
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if self.isInSearchMode {
-            return self.filteredDictionaryEntries.count
+        if isInSearchMode {
+            return filteredDictionaryEntries.count
         } else {
-            return self.dictionaryEntries.count
+            return dictionaryEntries.count
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.isInSearchMode {
-            return self.filteredDictionaryEntries[section].count
+            return filteredDictionaryEntries[section].count
         } else {
-            return self.dictionaryEntries[section].count
+            return dictionaryEntries[section].count
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.isInSearchMode {
-            return self.filteredCategories[section].rawValue
+        if isInSearchMode {
+            return filteredCategories[section].rawValue
         } else {
-            return self.categories[section].rawValue
+            return categories[section].rawValue
         }
     }
     
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.isInSearchMode {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CumulativeViewDictionaryEntryCell", for: indexPath) as! CumulativeViewDictionaryEntryTableViewCell
-            let dictionaryEntry = self.filteredDictionaryEntries[indexPath.section][indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CumulativeViewDictionaryEntryCell", for: indexPath) as! DictionaryEntryTableViewCell
+            let dictionaryEntry = filteredDictionaryEntries[indexPath.section][indexPath.row]
             cell.wordsLabel.text = dictionaryEntry.words
             cell.definitionLabel.text = dictionaryEntry.definition
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CumulativeViewDictionaryEntryCell", for: indexPath) as! CumulativeViewDictionaryEntryTableViewCell
-            let dictionaryEntry = self.dictionaryEntries[indexPath.section][indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CumulativeViewDictionaryEntryCell", for: indexPath) as! DictionaryEntryTableViewCell
+            let dictionaryEntry = dictionaryEntries[indexPath.section][indexPath.row]
             cell.wordsLabel.text = dictionaryEntry.words
             cell.definitionLabel.text = dictionaryEntry.definition
             return cell
@@ -111,21 +103,28 @@ class ViewDictionaryEntriesCumulativelyTableViewController: UITableViewControlle
     
     // MARK: Search controller delegate
     
-    func updateSearchResults(for searchController: UISearchController) {
-        self.tableView.reloadData()
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        loadData()
+        tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         if selectedScope == 0 {
-            self.searchType = .ByWord
+            searchType = .ByWord
         } else {
-            self.searchType = .ByDefinition
+            searchType = .ByDefinition
         }
-        self.tableView.reloadData()
+        loadData()
+        tableView.reloadData()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.tableView.reloadData()
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isInSearchMode = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isInSearchMode = false
+        tableView.reloadData()
     }
     
     // MARK: Picker delegate
@@ -144,24 +143,21 @@ class ViewDictionaryEntriesCumulativelyTableViewController: UITableViewControlle
 
     // MARK: Actions
     
-    @IBAction func handleSearchButtonPress(_ sender: Any) {
-        self.searchController.isActive = true
-    }
-    
     @IBAction func handleBookButtonPress(_ sender: Any) {
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: 250,height: 300)
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        viewController.preferredContentSize = CGSize(width: 250,height: 250)
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.selectRow(self.latestChapterForCumulativeViewScreen.rawValue - 1, inComponent: 0, animated: false)
         viewController.view.addSubview(pickerView)
         
         let selectChapterAlert = UIAlertController(title: "Select Chapter", message: "", preferredStyle: UIAlertControllerStyle.alert)
         selectChapterAlert.setValue(viewController, forKey: "contentViewController")
         
         let doneSelectingAction = UIAlertAction(title: "Done", style: .default, handler: {(action) in
-            if self.latestChapter.rawValue != (pickerView.selectedRow(inComponent: 0) + 1) {
-                self.latestChapter = Chapter(rawValue: pickerView.selectedRow(inComponent: 0) + 1)!
+            if self.latestChapterForCumulativeViewScreen.rawValue != (pickerView.selectedRow(inComponent: 0) + 1) {
+                self.latestChapterForCumulativeViewScreen = Chapter(rawValue: pickerView.selectedRow(inComponent: 0) + 1)!
                 self.loadData()
                 self.tableView.reloadData()
             }

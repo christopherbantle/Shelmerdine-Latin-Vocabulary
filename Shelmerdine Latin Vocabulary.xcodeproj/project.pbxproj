@@ -7,15 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F2D8F4620260B65001433F3 /* latin_vocabulary.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F2D8F4520260B65001433F3 /* latin_vocabulary.sqlite3 */; };
 		9F443FFA20224F1D0044BA3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F443FF920224F1D0044BA3E /* AppDelegate.swift */; };
 		9F44400120224F1D0044BA3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F443FFF20224F1D0044BA3E /* Main.storyboard */; };
 		9F44400320224F1D0044BA3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F44400220224F1D0044BA3E /* Assets.xcassets */; };
 		9F44400620224F1D0044BA3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F44400420224F1D0044BA3E /* LaunchScreen.storyboard */; };
 		9F5CC6622025179E0047DA68 /* ViewDictionaryEntriesCumulativelyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5CC6612025179E0047DA68 /* ViewDictionaryEntriesCumulativelyTableViewController.swift */; };
 		9F5CC664202517C90047DA68 /* ViewDictionaryEntriesByChapterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5CC663202517C90047DA68 /* ViewDictionaryEntriesByChapterTableViewController.swift */; };
-		9F5CC66C20251A530047DA68 /* CumulativeViewDictionaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5CC66B20251A530047DA68 /* CumulativeViewDictionaryEntryTableViewCell.swift */; };
-		9F5CC66E20251A740047DA68 /* ChapterViewDictionaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5CC66D20251A740047DA68 /* ChapterViewDictionaryEntryTableViewCell.swift */; };
-		9F7FDBB0202563C900538677 /* latin_vocabulary.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F7FDBAF202563C900538677 /* latin_vocabulary.sqlite3 */; };
+		9F5CC66E20251A740047DA68 /* DictionaryEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5CC66D20251A740047DA68 /* DictionaryEntryTableViewCell.swift */; };
 		9FA65407202374180042F178 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA65406202374180042F178 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F2D8F4520260B65001433F3 /* latin_vocabulary.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = latin_vocabulary.sqlite3; sourceTree = "<group>"; };
 		9F443FF620224F1D0044BA3E /* Shelmerdine Latin Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelmerdine Latin Vocabulary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F443FF920224F1D0044BA3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F44400020224F1D0044BA3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -39,9 +39,7 @@
 		9F44400C20224F1D0044BA3E /* Shelmerdine Latin VocabularyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shelmerdine Latin VocabularyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5CC6612025179E0047DA68 /* ViewDictionaryEntriesCumulativelyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDictionaryEntriesCumulativelyTableViewController.swift; sourceTree = "<group>"; };
 		9F5CC663202517C90047DA68 /* ViewDictionaryEntriesByChapterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDictionaryEntriesByChapterTableViewController.swift; sourceTree = "<group>"; };
-		9F5CC66B20251A530047DA68 /* CumulativeViewDictionaryEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeViewDictionaryEntryTableViewCell.swift; sourceTree = "<group>"; };
-		9F5CC66D20251A740047DA68 /* ChapterViewDictionaryEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewDictionaryEntryTableViewCell.swift; sourceTree = "<group>"; };
-		9F7FDBAF202563C900538677 /* latin_vocabulary.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = latin_vocabulary.sqlite3; path = "../../Latin Vocabulary Database/latin_vocabulary.sqlite3"; sourceTree = "<group>"; };
+		9F5CC66D20251A740047DA68 /* DictionaryEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEntryTableViewCell.swift; sourceTree = "<group>"; };
 		9FA65406202374180042F178 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +64,7 @@
 		9F443FED20224F1D0044BA3E = {
 			isa = PBXGroup;
 			children = (
+				9F2D8F4520260B65001433F3 /* latin_vocabulary.sqlite3 */,
 				9F443FF820224F1D0044BA3E /* Shelmerdine Latin Vocabulary */,
 				9F443FF720224F1D0044BA3E /* Products */,
 			);
@@ -83,9 +82,9 @@
 		9F443FF820224F1D0044BA3E /* Shelmerdine Latin Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
-				9F7FDBAF202563C900538677 /* latin_vocabulary.sqlite3 */,
-				9F5CC67020251A950047DA68 /* Individual Chapter View */,
-				9F5CC66F20251A7C0047DA68 /* Cumulative View */,
+				9F5CC663202517C90047DA68 /* ViewDictionaryEntriesByChapterTableViewController.swift */,
+				9F5CC6612025179E0047DA68 /* ViewDictionaryEntriesCumulativelyTableViewController.swift */,
+				9F5CC66D20251A740047DA68 /* DictionaryEntryTableViewCell.swift */,
 				9F443FF920224F1D0044BA3E /* AppDelegate.swift */,
 				9F443FFF20224F1D0044BA3E /* Main.storyboard */,
 				9F44400220224F1D0044BA3E /* Assets.xcassets */,
@@ -94,24 +93,6 @@
 				9FA65406202374180042F178 /* DatabaseManager.swift */,
 			);
 			path = "Shelmerdine Latin Vocabulary";
-			sourceTree = "<group>";
-		};
-		9F5CC66F20251A7C0047DA68 /* Cumulative View */ = {
-			isa = PBXGroup;
-			children = (
-				9F5CC6612025179E0047DA68 /* ViewDictionaryEntriesCumulativelyTableViewController.swift */,
-				9F5CC66B20251A530047DA68 /* CumulativeViewDictionaryEntryTableViewCell.swift */,
-			);
-			path = "Cumulative View";
-			sourceTree = "<group>";
-		};
-		9F5CC67020251A950047DA68 /* Individual Chapter View */ = {
-			isa = PBXGroup;
-			children = (
-				9F5CC66D20251A740047DA68 /* ChapterViewDictionaryEntryTableViewCell.swift */,
-				9F5CC663202517C90047DA68 /* ViewDictionaryEntriesByChapterTableViewController.swift */,
-			);
-			path = "Individual Chapter View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,9 +178,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2D8F4620260B65001433F3 /* latin_vocabulary.sqlite3 in Resources */,
 				9F44400620224F1D0044BA3E /* LaunchScreen.storyboard in Resources */,
 				9F44400320224F1D0044BA3E /* Assets.xcassets in Resources */,
-				9F7FDBB0202563C900538677 /* latin_vocabulary.sqlite3 in Resources */,
 				9F44400120224F1D0044BA3E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,11 +199,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F5CC66C20251A530047DA68 /* CumulativeViewDictionaryEntryTableViewCell.swift in Sources */,
 				9FA65407202374180042F178 /* DatabaseManager.swift in Sources */,
 				9F5CC6622025179E0047DA68 /* ViewDictionaryEntriesCumulativelyTableViewController.swift in Sources */,
 				9F5CC664202517C90047DA68 /* ViewDictionaryEntriesByChapterTableViewController.swift in Sources */,
-				9F5CC66E20251A740047DA68 /* ChapterViewDictionaryEntryTableViewCell.swift in Sources */,
+				9F5CC66E20251A740047DA68 /* DictionaryEntryTableViewCell.swift in Sources */,
 				9F443FFA20224F1D0044BA3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,7 +362,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Shelmerdine-Latin-Vocabulary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -397,7 +377,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Shelmerdine-Latin-Vocabulary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

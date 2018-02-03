@@ -1,5 +1,5 @@
 //
-//  CategoryViewDictionaryEntryTableViewCell.swift
+//  ChapterViewDictionaryEntryTableViewCell.swift
 //  Shelmerdine Latin Vocabulary
 //
 //  Created by Christopher Bantle on 2018-02-02.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CumulativeViewDictionaryEntryTableViewCell: UITableViewCell {
+class DictionaryEntryTableViewCell: UITableViewCell {
     
     // MARK: Properties
     

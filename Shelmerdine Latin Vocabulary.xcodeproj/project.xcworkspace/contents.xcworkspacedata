@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Shelmerdine Latin Vocabulary.xcodeproj">
+      location = "group:../Shelmerdine Latin Vocabulary/latin_vocabulary.sqlite3">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
