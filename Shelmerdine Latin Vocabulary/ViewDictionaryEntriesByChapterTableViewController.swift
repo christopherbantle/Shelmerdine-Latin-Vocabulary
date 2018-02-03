@@ -27,7 +27,7 @@ class ViewDictionaryEntriesByChapterTableViewController: UITableViewController, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Chapter " + chapterForIndividualChapterViewScreen.rawValue.description
+        navigationItem.title = "Chapter " + chapterForIndividualChapterViewScreen.rawValue.description + " Vocabulary"
         
         loadData()
         
@@ -89,7 +89,7 @@ class ViewDictionaryEntriesByChapterTableViewController: UITableViewController, 
         let doneSelectingAction = UIAlertAction(title: "Done", style: .default, handler: {(action) in
             if self.chapterForIndividualChapterViewScreen.rawValue != (pickerView.selectedRow(inComponent: 0) + 1) {
                 self.chapterForIndividualChapterViewScreen = Chapter(rawValue: pickerView.selectedRow(inComponent: 0) + 1)!
-                self.navigationItem.title = "Chapter " + self.chapterForIndividualChapterViewScreen.rawValue.description
+                self.navigationItem.title = "Chapter " + self.chapterForIndividualChapterViewScreen.rawValue.description + " Vocabulary"
                 self.loadData()
                 self.tableView.reloadData()
             }

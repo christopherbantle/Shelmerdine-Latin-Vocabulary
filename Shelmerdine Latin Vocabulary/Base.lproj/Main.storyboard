@@ -73,7 +73,7 @@
             </objects>
             <point key="canvasLocation" x="2060" y="-321.58920539730138"/>
         </scene>
-        <!--Vocabulary-->
+        <!--All Vocabulary-->
         <scene sceneID="7f2-Ld-CA5">
             <objects>
                 <tableViewController id="2iP-ce-vmI" customClass="ViewDictionaryEntriesCumulativelyTableViewController" customModule="Shelmerdine_Latin_Vocabulary" customModuleProvider="target" sceneMemberID="viewController">
@@ -124,7 +124,7 @@
                             <outlet property="delegate" destination="2iP-ce-vmI" id="q43-1x-R6K"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Vocabulary" id="Nth-tL-Q7Y">
+                    <navigationItem key="navigationItem" title="All Vocabulary" id="Nth-tL-Q7Y">
                         <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="kej-jW-gPG">
                             <connections>
                                 <action selector="handleBookButtonPress:" destination="2iP-ce-vmI" id="uPJ-Za-8CS"/>
@@ -154,11 +154,11 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Chapter-->
+        <!--Single Chapter-->
         <scene sceneID="coX-wO-lE9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JMc-FI-GGq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chapter" image="first" selectedImage="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Single Chapter" image="first" selectedImage="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="I0U-oT-u1U">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
