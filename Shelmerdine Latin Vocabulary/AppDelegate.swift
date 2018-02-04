@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var databaseManager: DatabaseManager = {
         let bundle = Bundle.main
-        let pathToDatabase = bundle.url(forResource: "latin_vocabulary", withExtension: ".sqlite3")
+        let pathToDatabase = bundle.url(forResource: "vocabulary", withExtension: ".sqlite")
         guard let databaseManger = DatabaseManager(pathToDatabase: pathToDatabase!.absoluteString) else {
             fatalError("Could not establish connection to database.")
         }

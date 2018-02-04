@@ -104,93 +104,98 @@ class DatabaseManager {
     private func getDictionaryEntryFromTableRowData(ptrToRowData: OpaquePointer, category: WordType) -> DictionaryEntry {
         switch category {
             case .Adjectives:
-                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let thirdForm = String(cString: sqlite3_column_text(ptrToRowData, 3))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 4))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 5))
+                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let thirdForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 3))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 4))
                 
                 let words = getCommaSeperatedWordsString(from: [firstForm, secondForm, thirdForm])
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
                 
                 return DictionaryEntry(words: words, definition: fullDefinition)
             case .Adverbs:
-                let words = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 3))
+                let words = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 2))
                 
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
                 
                 return DictionaryEntry(words: words, definition: fullDefinition)
                 case .CoordinatingConjunctions:
-                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 3))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 4))
+                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 2))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 3))
                 
                 let words = getCommaSeperatedWordsString(from: [firstForm, secondForm])
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
                 
                 return DictionaryEntry(words: words, definition: fullDefinition)
             case .Nouns:
-                let nominative = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let genitive = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 3)) + " " + String(cString: sqlite3_column_text(ptrToRowData, 4))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 5))
+                let nominative = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let genitive = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 2)) + " " + String(cString: sqlite3_column_text(ptrToRowData, 3))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 4))
+                let isIStem = sqlite3_column_int(ptrToRowData, 5)
                 
-                let words = getCommaSeperatedWordsString(from: [nominative, genitive])
+                var words = getCommaSeperatedWordsString(from: [nominative, genitive])
+                if isIStem == 1 {
+                    words = "*" + words
+                }
+                    
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
                 
                 return DictionaryEntry(words: words, definition: fullDefinition)
             case .Prepositions:
-                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 4))
+                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 3))
                 
-                let words = getCommaSeperatedWordsString(from: [firstForm, secondForm]) + " (+ " + String(cString: sqlite3_column_text(ptrToRowData, 3)) + ")"
+                let words = getCommaSeperatedWordsString(from: [firstForm, secondForm]) + " (+ " + String(cString: sqlite3_column_text(ptrToRowData, 2)) + ")"
                 
                 return DictionaryEntry(words: words, definition: definition)
             case .Pronouns:
-                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let thirdForm = String(cString: sqlite3_column_text(ptrToRowData, 3))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 4))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 5))
+                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let thirdForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 3))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 4))
                 
                 let words = getCommaSeperatedWordsString(from: [firstForm, secondForm, thirdForm])
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
                 
                 return DictionaryEntry(words: words, definition: fullDefinition)
             case .SubordinatingConjunctions:
-                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 2))
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 3))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 4))
+                let firstForm = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let secondForm = String(cString: sqlite3_column_text(ptrToRowData, 1))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 2))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 3))
                 
                 let words = getCommaSeperatedWordsString(from: [firstForm, secondForm])
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
                 
                 return DictionaryEntry(words: words, definition: fullDefinition)
             case .Verbs:
-                let firstPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 1))
-                let secondPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 2))
+                let firstPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 0))
+                let secondPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 1))
                 
-                var thirdPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 3))
-                let thirdPrincipalPartAlt = String(cString: sqlite3_column_text(ptrToRowData, 4))
+                var thirdPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 2))
+                let thirdPrincipalPartAlt = String(cString: sqlite3_column_text(ptrToRowData, 3))
                 if !thirdPrincipalPartAlt.isEmpty {
                     thirdPrincipalPart = thirdPrincipalPart + " or " + thirdPrincipalPartAlt
                 }
                 
-                var fourthPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 5))
-                let fourthPrincipalPartAlt = String(cString: sqlite3_column_text(ptrToRowData, 6))
+                var fourthPrincipalPart = String(cString: sqlite3_column_text(ptrToRowData, 4))
+                let fourthPrincipalPartAlt = String(cString: sqlite3_column_text(ptrToRowData, 5))
                 if !fourthPrincipalPartAlt.isEmpty {
                     fourthPrincipalPart = fourthPrincipalPart + " or " + fourthPrincipalPartAlt
                 }
                 
-                let definition = String(cString: sqlite3_column_text(ptrToRowData, 8))
-                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 9))
+                let definition = String(cString: sqlite3_column_text(ptrToRowData, 7))
+                let otherInformation = String(cString: sqlite3_column_text(ptrToRowData, 8))
                 
-                let goesWith = String(cString: sqlite3_column_text(ptrToRowData, 7))
+                let goesWith = String(cString: sqlite3_column_text(ptrToRowData, 6))
                 var words = getCommaSeperatedWordsString(from: [firstPrincipalPart, secondPrincipalPart, thirdPrincipalPart, fourthPrincipalPart])
                 words = goesWith.isEmpty ? words : words + " (+ " + goesWith + ")"
                 let fullDefinition = otherInformation.isEmpty ? definition : definition + " (" + otherInformation + ")"
@@ -201,23 +206,23 @@ class DatabaseManager {
     
     // MARK: Generate queries
     
-    let adjectiveQueryBegining = "SELECT * FROM Adjectives WHERE"
-    let adverbQueryBegining = "SELECT * FROM Adverbs WHERE"
-    let coordinatingConjunctionsQueryBegining = "SELECT * FROM CoordinatingConjunctions WHERE"
-    let nounsQueryBegining = "SELECT * FROM Nouns WHERE"
-    let prepositionsQueryBegining = "SELECT * FROM Prepositions WHERE"
-    let pronounsQueryBegining = "SELECT * FROM Pronouns WHERE"
-    let subordinatingConjunctionsQueryBegining = "SELECT * FROM SubordinatingConjunctions WHERE"
-    let verbQueryBegining = "SELECT * FROM Verbs WHERE"
+    let adjectiveQueryBegining = "SELECT firstForm, secondForm, thirdForm, definition, otherInformation FROM Adjectives WHERE"
+    let adverbQueryBegining = "SELECT word, definition, otherInformation FROM Adverbs WHERE"
+    let coordinatingConjunctionsQueryBegining = "SELECT firstForm, secondForm, definition, otherInformation FROM CoordinatingConjunctions WHERE"
+    let nounsQueryBegining = "SELECT nominative, genitive, gender, definition, otherInformation, isIStem FROM Nouns WHERE"
+    let prepositionsQueryBegining = "SELECT firstForm, secondForm, goesWith, definition FROM Prepositions WHERE"
+    let pronounsQueryBegining = "SELECT firstForm, secondForm, thirdForm, definition, otherInformation FROM Pronouns WHERE"
+    let subordinatingConjunctionsQueryBegining = "SELECT firstForm, secondForm, definition, otherInformation FROM SubordinatingConjunctions WHERE"
+    let verbQueryBegining = "SELECT firstPrincipalPart, secondPrincipalPart, thirdPrincipalPart, thirdPrincipalPartAlt, fourthPrincipalPart, fourthPrincipalPartAlt, goesWith, definition, otherInformation FROM Verbs WHERE"
     
-    let adjectiveQueryEnding = "ORDER BY firstForm ASC;"
-    let adverbQueryEnding = "ORDER BY word ASC;"
-    let coordinatingConjunctionsQueryEnding = "ORDER BY firstForm ASC;"
-    let nounsQueryEnding = "ORDER BY nominative ASC;"
-    let prepositionsQueryEnding = "ORDER BY firstForm ASC;"
-    let pronounsQueryEnding = "ORDER BY firstForm ASC;"
-    let subordinatingConjunctionsQueryEnding = "ORDER BY firstForm ASC;"
-    let verbQueryEnding = "ORDER BY firstPrincipalPart ASC;"
+    let adjectiveQueryEnding = "ORDER BY firstFormNM ASC;"
+    let adverbQueryEnding = "ORDER BY wordNM ASC;"
+    let coordinatingConjunctionsQueryEnding = "ORDER BY firstFormNM ASC;"
+    let nounsQueryEnding = "ORDER BY nominativeNM ASC;"
+    let prepositionsQueryEnding = "ORDER BY firstFormNM ASC;"
+    let pronounsQueryEnding = "ORDER BY firstFormNM ASC;"
+    let subordinatingConjunctionsQueryEnding = "ORDER BY firstFormNM ASC;"
+    let verbQueryEnding = "ORDER BY firstPrincipalPartNM ASC;"
     
     private func getSearchQueryByDefinition(chapter: Chapter, category: WordType, stringToSearchFor: String) -> String {
         let stringToSearchDefinitionsFor = "%" + stringToSearchFor + "%"
@@ -249,28 +254,28 @@ class DatabaseManager {
         
         switch category {
         case .Adjectives:
-            let conditions = " (firstForm LIKE '\(stringToSearchWordsFor)' OR secondForm LIKE '\(stringToSearchWordsFor)'  OR thirdForm LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (firstFormNM LIKE '\(stringToSearchWordsFor)' OR secondFormNM LIKE '\(stringToSearchWordsFor)'  OR thirdFormNM LIKE '\(stringToSearchWordsFor)') "
             return adjectiveQueryBegining + chapterCondition + conditions + adjectiveQueryEnding
         case .Adverbs:
-            let conditions = " word LIKE '\(stringToSearchWordsFor)' "
+            let conditions = " wordNM LIKE '\(stringToSearchWordsFor)' "
             return adverbQueryBegining + chapterCondition + conditions + adverbQueryEnding
         case .CoordinatingConjunctions:
-            let conditions = " (firstForm LIKE '\(stringToSearchWordsFor)' OR secondForm LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (firstFormNM LIKE '\(stringToSearchWordsFor)' OR secondFormNM LIKE '\(stringToSearchWordsFor)') "
             return coordinatingConjunctionsQueryBegining + chapterCondition + conditions + coordinatingConjunctionsQueryEnding
         case .Nouns:
-            let conditions = " (nominative LIKE '\(stringToSearchWordsFor)' OR genitive LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (nominativeNM LIKE '\(stringToSearchWordsFor)' OR genitiveNM LIKE '\(stringToSearchWordsFor)') "
             return nounsQueryBegining + chapterCondition + conditions + nounsQueryEnding
         case .Prepositions:
-            let conditions = " (firstForm LIKE '\(stringToSearchWordsFor)' OR secondForm LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (firstFormNM LIKE '\(stringToSearchWordsFor)' OR secondFormNM LIKE '\(stringToSearchWordsFor)') "
             return prepositionsQueryBegining + chapterCondition + conditions + prepositionsQueryEnding
         case .Pronouns:
-            let conditions = " (firstForm LIKE '\(stringToSearchWordsFor)' OR secondForm LIKE '\(stringToSearchWordsFor)' OR thirdForm LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (firstFormNM LIKE '\(stringToSearchWordsFor)' OR secondFormNM LIKE '\(stringToSearchWordsFor)' OR thirdFormNM LIKE '\(stringToSearchWordsFor)') "
             return pronounsQueryBegining + chapterCondition + conditions + pronounsQueryEnding
         case .SubordinatingConjunctions:
-            let conditions = " (firstForm LIKE '\(stringToSearchWordsFor)' OR secondForm LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (firstFormNM LIKE '\(stringToSearchWordsFor)' OR secondFormNM LIKE '\(stringToSearchWordsFor)') "
             return subordinatingConjunctionsQueryBegining + chapterCondition + conditions + subordinatingConjunctionsQueryEnding
         case .Verbs:
-            let conditions = " (firstPrincipalPart LIKE '\(stringToSearchWordsFor)' OR secondPrincipalPart LIKE '\(stringToSearchWordsFor)' OR thirdPrincipalPart LIKE '\(stringToSearchWordsFor)' OR thirdPrincipalPartAlt LIKE '\(stringToSearchWordsFor)' OR fourthPrincipalPart LIKE '\(stringToSearchWordsFor)' OR fourthPrincipalPartAlt LIKE '\(stringToSearchWordsFor)') "
+            let conditions = " (firstPrincipalPartNM LIKE '\(stringToSearchWordsFor)' OR secondPrincipalPartNM LIKE '\(stringToSearchWordsFor)' OR thirdPrincipalPartNM LIKE '\(stringToSearchWordsFor)' OR thirdPrincipalPartAltNM LIKE '\(stringToSearchWordsFor)' OR fourthPrincipalPartNM LIKE '\(stringToSearchWordsFor)' OR fourthPrincipalPartAltNM LIKE '\(stringToSearchWordsFor)') "
             return verbQueryBegining + chapterCondition + conditions + verbQueryEnding
         }
     }
@@ -332,7 +337,7 @@ class DatabaseManager {
                 dictionaryEntries.append(getDictionaryEntryFromTableRowData(ptrToRowData: ptrToQueryResults!, category: category))
             }
         } else {
-            fatalError("SQL query \(query) failed.")
+            fatalError("The following SQL query failed: \(query)")
         }
         sqlite3_finalize(ptrToQueryResults)
         

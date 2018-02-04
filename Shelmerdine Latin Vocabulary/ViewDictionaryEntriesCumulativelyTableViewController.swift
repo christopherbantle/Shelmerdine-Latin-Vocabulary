@@ -122,7 +122,7 @@ class ViewDictionaryEntriesCumulativelyTableViewController: UITableViewControlle
         isInSearchMode = true
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isInSearchMode = false
         tableView.reloadData()
     }
